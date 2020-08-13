@@ -8,7 +8,7 @@ import (
 // BlogmHandler used to serve http
 type BlogmHandler struct{}
 
-func (h BlogmHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (h BlogmHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) { // multiplexer
 	switch r.Method {
 	case "GET":
 		// Static routes only, dynamic ones in default
@@ -30,13 +30,13 @@ func (h BlogmHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func dynamicRoutingGET(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 
-	match, err := regexp.MatchString("^/assets/", path)
+	match, err := regexp.MatchString("^/assets/", path) // match for /assets/* URLs, that serve the /assets/public/ folder
 	check(err)
 	if match {
 		serveAssets(w, r)
 		return
 	}
 
-	w.WriteHeader(http.StatusNotFound)
+	w.WriteHeader(http.StatusNotFound) // If none of the routes matched, go for 404 error
 	w.Write([]byte("404 pas trouve lol"))
 }

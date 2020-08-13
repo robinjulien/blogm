@@ -31,6 +31,7 @@ func initInstance() {
 			BlogName: "default blog name",
 		}
 
+		// Write json into config file
 		jsoncfg, err := json.MarshalIndent(cfg, "", "	")
 		check(err)
 		_, err = file.Write(jsoncfg)
@@ -38,6 +39,7 @@ func initInstance() {
 		err = file.Close()
 		check(err)
 
+		// create all directories
 		err = os.Mkdir("posts", os.ModePerm)
 		check(err)
 		err = os.Mkdir("cdn", os.ModePerm)
@@ -53,6 +55,7 @@ func initInstance() {
 		// But we let the user the possibility to modify the pages. We don't want the user to have to rebuild the binary everytime he makes a change in the source code.
 		// Later, maybe we can let the user the possibility to choose wether he wants the files to be loaded from the assets folder, or directly from the memory. TODO
 
+		// Write the content of each file into the right folder, no way to do that automatically, so we have to tell manually which file goes where, and what is the corresponding const var
 		writeFile("./assets/home.tpl", HOME_TPL)
 		writeFile("./assets/public/style.css", STYLE_CSS)
 		writeFile("./assets/header.tpl", HEADER_TPL)

@@ -14,6 +14,8 @@ func help() {
 You can use one of the following command :
 - help : get the help you need
 - init : init a blog in the current directory
+- server {start} : manage the http server
+- config : manage the config
 
 You are located at %s`, wd)
 	fmt.Println()
