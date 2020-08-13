@@ -2,3 +2,4 @@ blogm.exe
 blogm
 config.json
 cli/assets.go
+buildtest.bat

@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+
+	"github.com/robinjulien/blogm/entities"
 )
 
 // write string into filename, creating the file
@@ -23,7 +25,7 @@ func initInstance() {
 		check(err)
 
 		// Default config
-		cfg := Config{
+		cfg := entities.Config{
 			Host:     "localhost",
 			Port:     "8080",
 			BlogName: "default blog name",
