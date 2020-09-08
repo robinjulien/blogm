@@ -1,1 +1,3 @@
-MENU
+<nav>
+	MENU
+</nav>

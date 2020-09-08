@@ -1,4 +1,6 @@
 {{template "header.tpl" .HeaderData}}
 {{template "menu.tpl" .MenuData}}
-{{ .Test }}
+<div id="page">
+	{{ .Test }}
+</div>
 {{template "footer.tpl" .FooterData}}

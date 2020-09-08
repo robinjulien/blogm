@@ -1,4 +1,77 @@
+/*
+All CSS properties can be custom by changing values of vars
+*/
+:root {
+	/* GENERAL */
+	--general-page-side-padding: 10%;
+	--general-background: blue;
+
+	/* PAGE */
+	--page-background: grey;
+	--page-margin-top-bottom: 20px;
+
+	/* HEADER */
+	--header-background: green;
+	--header-height: 10vh;
+	--header-min-height: 50px;
+	--header-max-height: none;
+
+	/* menu BAR */
+	--menu-background: red;
+	--menu-height: 30px;
+	--menu-min-height: none;
+	--menu-max-height: none;
+
+	/* FOOTER */
+	--footer-background: var(--header-background);
+	--footer-display: block;
+	--footer-height: 10vh;
+	--footer-min-height: 50px;
+	--footer-max-height: none;
+}
+
 body {
 	margin: 0;
 	padding: 0;
+	background: var(--general-background);
+
+	min-height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	background: var(--header-background);
+	padding: 0 var(--general-page-side-padding);
+
+	height: var(--header-height);
+	min-height: var(--header-min-height);
+	max-height: var(--header-max-height);
+	
+}
+
+nav {
+	background: var(--menu-background);
+	padding: 0 var(--general-page-side-padding);
+
+	height: var(--menu-height);
+	min-height: var(--menu-min-height);
+	max-height: var(--menu-max-height);
+}
+
+#page {
+	background: var(--page-background);
+	margin: var(--page-margin-top-bottom) var(--general-page-side-padding);
+	flex-grow: 1; /* for sticky footer */
+}
+
+footer {
+	background: var(--footer-background);
+	padding: 0 var(--general-page-side-padding);
+	display: var(--footer-display); /* to disable footer */
+
+	height: var(--footer-height);
+	min-height: var(--footer-min-height);
+	max-height: var(--footer-max-height);
 }
