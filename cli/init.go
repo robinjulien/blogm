@@ -9,10 +9,10 @@ import (
 )
 
 // write string into filename, creating the file
-func writeFile(fileName, content string) {
+func writeFile(fileName string, content []byte) {
 	f, err := os.Create(fileName)
 	check(err)
-	_, err = f.WriteString(content)
+	_, err = f.Write(content)
 	check(err)
 	err = f.Close()
 	check(err)
@@ -26,9 +26,10 @@ func initInstance() {
 
 		// Default config
 		cfg := entities.Config{
-			Host:     "localhost",
-			Port:     "8080",
-			BlogName: "default blog name",
+			Host:          "localhost",
+			Port:          "8080",
+			BlogName:      "default blog name",
+			HomePageTitle: "Default Homepage Title",
 		}
 
 		// Write json into config file
@@ -57,13 +58,18 @@ func initInstance() {
 
 		// Write the content of each file into the right folder, no way to do that automatically, so we have to tell manually which file goes where, and what is the corresponding const var
 		writeFile("./assets/home.tpl", HOME_TPL)
-		writeFile("./assets/public/style.css", STYLE_CSS)
 		writeFile("./assets/header.tpl", HEADER_TPL)
 		writeFile("./assets/footer.tpl", FOOTER_TPL)
 		writeFile("./assets/menu.tpl", MENU_TPL)
 		writeFile("./assets/posts.tpl", POSTS_TPL)
 		writeFile("./assets/view_post.tpl", VIEW_POST_TPL)
 		writeFile("./assets/view_page.tpl", VIEW_PAGE_TPL)
+
+		writeFile("./assets/public/style.css", STYLE_CSS)
+		writeFile("./assets/public/highlight.js", HIGHLIGHT_JS)
+		writeFile("./assets/public/highlightjs.css", HIGHLIGHTJS_CSS)
+
+		writeFile("./pages/home.md", HOME_MD)
 
 	} else {
 		// config file already exists, there is a chance that a website is already init here

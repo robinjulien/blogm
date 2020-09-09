@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"io/ioutil"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -28,17 +28,25 @@ func main() {
 	check(err)
 	_, err = assetsFile.WriteString(`package cli
 
-const (
+var (
 `)
 	check(err)
 	for _, file := range files {
-		_, err = assetsFile.WriteString("	" + formatName(file.Name()) + " = `") // Write const var name
+		content, err := ioutil.ReadFile(assetsFolder + "/" + file.Name())
 		check(err)
-		fileO, err := os.Open(assetsFolder + "/" + file.Name())
+		_, err = assetsFile.WriteString("	" + formatName(file.Name()) + " = []byte{") // Write const var name
 		check(err)
-		io.Copy(assetsFile, fileO)
-		fileO.Close()
-		_, err = assetsFile.WriteString("`\n")
+		var sb strings.Builder
+		for i, b := range content {
+			sb.WriteString(strconv.Itoa(int(b)))
+			if i != len(content)-1 {
+				sb.WriteRune(',')
+			}
+		}
+		_, err = assetsFile.WriteString(sb.String())
+		check(err)
+		_, err = assetsFile.WriteString("}\n")
+		check(err)
 	}
 	_, err = assetsFile.WriteString(")\n")
 	check(err)

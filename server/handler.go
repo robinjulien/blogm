@@ -37,6 +37,12 @@ func dynamicRoutingGET(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusNotFound) // If none of the routes matched, go for 404 error
-	w.Write([]byte("404 pas trouve lol"))
+	match, err = regexp.MatchString("^/pages/", path) // match for /assets/* URLs, that serve the /assets/public/ folder
+	check(err)
+	if match {
+		servePage(w, r)
+		return
+	}
+
+	serve404(w, r) // If none of the routes matched, go for 404 error
 }

@@ -2,8 +2,13 @@ package server
 
 import (
 	"html/template"
+	"io/ioutil"
 	"net/http"
+	"os"
+	"path/filepath"
 	"strings"
+
+	"gitlab.com/golang-commonmark/markdown"
 )
 
 const (
@@ -24,6 +29,14 @@ type FooterData struct {
 type MenuData struct {
 }
 
+// PageContent is all content a page need to be displayed
+type PageContent struct {
+	HeaderData
+	FooterData
+	MenuData
+	Content template.HTML
+}
+
 func rewritePath(path, oldprefix, newprefix string) string {
 	return strings.Replace(path, oldprefix, newprefix, 1)
 }
@@ -33,23 +46,52 @@ func serveHomePage(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles(templatesFolder+"home.tpl", templatesFolder+"header.tpl", templatesFolder+"footer.tpl", templatesFolder+"menu.tpl")
 	check(err)
 
-	// data to pass to the templates
-	data := struct {
-		HeaderData
-		FooterData
-		MenuData
-		Test string
-	}{
+	pageMD, err := ioutil.ReadFile("./pages/home.md")
+	check(err)
+
+	md := markdown.New()
+
+	data := PageContent{
 		HeaderData: HeaderData{
 			BlogTitle: cfg.BlogName,
-			PageTitle: "Home - BLOGM",
+			PageTitle: cfg.HomePageTitle,
 		},
 		FooterData: FooterData{},
 		MenuData:   MenuData{},
-		Test:       "je suis un test",
+		Content:    template.HTML(md.RenderToString(pageMD)),
 	}
 
 	tmpl.ExecuteTemplate(w, "home.tpl", data)
+}
+
+// function that respond when a specific page is requested at /pages/*
+func servePage(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles(templatesFolder+"view_page.tpl", templatesFolder+"header.tpl", templatesFolder+"footer.tpl", templatesFolder+"menu.tpl")
+	check(err)
+
+	filePath := strings.Replace(r.URL.Path, "/pages/", "", 1)
+
+	pageMD, err := ioutil.ReadFile("./pages/" + filePath + ".md")
+
+	if os.IsNotExist(err) { // If the specified page not found then 404 error
+		serve404(w, r)
+		return
+	}
+	check(err) // In case of another error
+
+	md := markdown.New()
+
+	data := PageContent{
+		HeaderData: HeaderData{
+			BlogTitle: cfg.BlogName,
+			PageTitle: filepath.Base(filePath),
+		},
+		FooterData: FooterData{},
+		MenuData:   MenuData{},
+		Content:    template.HTML(md.RenderToString(pageMD)),
+	}
+
+	tmpl.ExecuteTemplate(w, "view_page.tpl", data)
 }
 
 func serveAssets(w http.ResponseWriter, r *http.Request) {
