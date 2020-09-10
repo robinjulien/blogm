@@ -44,5 +44,19 @@ func dynamicRoutingGET(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	match, err = regexp.MatchString("^/posts/*$", path) // match for /posts/* URLs, that serve the /assets/public/ folder
+	check(err)
+	if match {
+		serveListPosts(w, r)
+		return
+	}
+
+	match, err = regexp.MatchString("^/posts/", path) // match for /assets/* URLs, that serve the /assets/public/ folder
+	check(err)
+	if match {
+		servePost(w, r)
+		return
+	}
+
 	serve404(w, r) // If none of the routes matched, go for 404 error
 }

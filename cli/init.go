@@ -26,10 +26,13 @@ func initInstance() {
 
 		// Default config
 		cfg := entities.Config{
-			Host:          "localhost",
-			Port:          "8080",
-			BlogName:      "default blog name",
-			HomePageTitle: "Default Homepage Title",
+			Host:               "localhost",
+			Port:               "8080",
+			BlogName:           "default blog name",
+			HomePageTitle:      "Default Homepage Title",
+			MaxPostsOnListPage: 10,
+			PageTitleSuffix:    " - BLOGM",
+			ListPostsPageTitle: "Posts List",
 		}
 
 		// Write json into config file
