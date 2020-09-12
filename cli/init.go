@@ -28,11 +28,25 @@ func initInstance() {
 		cfg := entities.Config{
 			Host:               "localhost",
 			Port:               "8080",
-			BlogName:           "default blog name",
+			BlogName:           "Blog Name",
+			BlogLogoURL:        "//via.placeholder.com/60",
 			HomePageTitle:      "Default Homepage Title",
 			MaxPostsOnListPage: 10,
 			PageTitleSuffix:    " - BLOGM",
 			ListPostsPageTitle: "Posts List",
+			NoPostMessage:      "No post here...",
+			MenuLinks: []entities.Link{
+				{
+					Text:  "Home",
+					Dest:  "/",
+					Title: "Home",
+				},
+				{
+					Text:  "Recent Posts",
+					Dest:  "/posts",
+					Title: "Recent Posts",
+				},
+			},
 		}
 
 		// Write json into config file
@@ -69,6 +83,7 @@ func initInstance() {
 		writeFile("./assets/view_page.tpl", VIEW_PAGE_TPL)
 
 		writeFile("./assets/public/style.css", STYLE_CSS)
+		writeFile("./assets/public/markdown.css", MARKDOWN_CSS)
 		writeFile("./assets/public/highlight.js", HIGHLIGHT_JS)
 		writeFile("./assets/public/highlightjs.css", HIGHLIGHTJS_CSS)
 

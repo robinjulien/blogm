@@ -1,15 +1,15 @@
-{{template "header.tpl" .HeaderData}}
-{{template "menu.tpl" .MenuData}}
-<div id="page">
-	{{ .Content }}
-	{{ range .Posts }}
-		<div class="postview">
-			{{ .Title }} - {{ formatDate .Date }}
-		</div>
-	{{ else }}
-		<div>
-			No post here
-		</div>
-	{{ end }}
+{{template "header.tpl" .HeaderData}} {{template "menu.tpl" .MenuData}}
+<div id="wrapper">
+    <div id="page">
+        {{ .Content }} {{ range .Posts }}
+        <p class="postview">
+            {{ .Title }} - {{ formatDate .Date }}
+        </p>
+        {{ else }}
+        <p>
+            {{ .NoPostMessage }}
+        </p>
+        {{ end }}
+    </div>
 </div>
 {{template "footer.tpl" .FooterData}}

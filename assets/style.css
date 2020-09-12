@@ -1,77 +1,101 @@
 /*
 All CSS properties can be custom by changing values of vars
 */
+
 :root {
-	/* GENERAL */
-	--general-page-side-padding: 10%;
-	--general-background: blue;
-
-	/* PAGE */
-	--page-background: grey;
-	--page-margin-top-bottom: 20px;
-
-	/* HEADER */
-	--header-background: green;
-	--header-height: 10vh;
-	--header-min-height: 50px;
-	--header-max-height: none;
-
-	/* menu BAR */
-	--menu-background: red;
-	--menu-height: 30px;
-	--menu-min-height: none;
-	--menu-max-height: none;
-
-	/* FOOTER */
-	--footer-background: var(--header-background);
-	--footer-display: block;
-	--footer-height: 10vh;
-	--footer-min-height: 50px;
-	--footer-max-height: none;
+    /* GENERAL */
+    --general-page-side-padding: 20%;
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	background: var(--general-background);
-
-	min-height: 100vh;
-
-	display: flex;
-	flex-direction: column;
+    margin: 0;
+    padding: 0;
+    font-family: "Georgia", "Times New Roman", serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
-	background: var(--header-background);
-	padding: 0 var(--general-page-side-padding);
+    display: flex;
+    align-items: flex-end;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    padding: 10px var(--general-page-side-padding);
+    height: 60px;
+}
 
-	height: var(--header-height);
-	min-height: var(--header-min-height);
-	max-height: var(--header-max-height);
-	
+#header-logo-box {
+    height: 60px;
+    width: 60px;
+    margin-right: 10px;
+}
+
+#header-logo {
+    height: 60px;
+    width: 60px;
+}
+
+header a {
+    text-decoration: none;
 }
 
 nav {
-	background: var(--menu-background);
-	padding: 0 var(--general-page-side-padding);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 var(--general-page-side-padding);
+    border-top: 1px solid lightgray;
+    box-shadow: 0px 10px 15px -10px rgba(0, 0, 0, 0.75);
+}
 
-	height: var(--menu-height);
-	min-height: var(--menu-min-height);
-	max-height: var(--menu-max-height);
+nav a {
+    display: block;
+    margin: 15px;
+    color: rgb(96, 96, 96);
+    transition: all 0.1s ease;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: rgb(48, 48, 48);
+}
+
+#wrapper {
+    background: none;
+    margin: 20px var(--general-page-side-padding);
+    padding: 0;
+    border-radius: 0;
+    flex-grow: 1;
+    /* for sticky footer */
 }
 
 #page {
-	background: var(--page-background);
-	margin: var(--page-margin-top-bottom) var(--general-page-side-padding);
-	flex-grow: 1; /* for sticky footer */
+    background: none;
+    padding: 20px 0 0 0;
+    border-radius: 0;
 }
 
 footer {
-	background: var(--footer-background);
-	padding: 0 var(--general-page-side-padding);
-	display: var(--footer-display); /* to disable footer */
+    background: black;
+    padding: 20px var(--general-page-side-padding);
+    display: block;
+    /* to disable footer */
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 40px;
+}
 
-	height: var(--footer-height);
-	min-height: var(--footer-min-height);
-	max-height: var(--footer-max-height);
+pre code {
+    border-radius: 4px;
+    padding: 8px!important;
+}
+
+.disable-default-link a,
+.disable-default-link a:hover,
+.disable-default-link a:visited,
+.disable-default-link a:focus,
+.disable-default-link a:active {
+    color: inherit;
 }

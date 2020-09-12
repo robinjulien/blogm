@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/robinjulien/blogm/entities"
 	"gitlab.com/golang-commonmark/markdown"
 )
 
@@ -18,16 +19,20 @@ const (
 
 // HeaderData contains all the informations that goes into the header section of the template
 type HeaderData struct {
-	BlogTitle string
-	PageTitle string
+	BlogName    string
+	PageTitle   string
+	BlogLogoURL string
 }
 
 // FooterData contains all the informations that goes into the footer section of the template
 type FooterData struct {
+	BlogName    string
+	BlogLogoURL string
 }
 
 // MenuData contains all the informations that goes into the menu section of the template
 type MenuData struct {
+	Links []entities.Link
 }
 
 // PageContent is all content a page need to be displayed
@@ -48,10 +53,11 @@ type PostView struct {
 // PageListPosts is the content of the list posts page
 type PageListPosts struct {
 	PageContent
-	PageNumber int
-	MaxPage    int
-	NumPosts   int
-	Posts      []PostView
+	PageNumber    int
+	MaxPage       int
+	NumPosts      int
+	Posts         []PostView
+	NoPostMessage string
 }
 
 // function that respond when the home page is requested
@@ -63,12 +69,18 @@ func serveHomePage(w http.ResponseWriter, r *http.Request) {
 
 	data := PageContent{
 		HeaderData: HeaderData{
-			BlogTitle: cfg.BlogName,
-			PageTitle: cfg.HomePageTitle + cfg.PageTitleSuffix,
+			BlogName:    cfg.BlogName,
+			PageTitle:   cfg.HomePageTitle + cfg.PageTitleSuffix,
+			BlogLogoURL: cfg.BlogLogoURL,
 		},
-		FooterData: FooterData{},
-		MenuData:   MenuData{},
-		Content:    template.HTML(md.RenderToString(pageMD)),
+		FooterData: FooterData{
+			BlogName:    cfg.BlogName,
+			BlogLogoURL: cfg.BlogLogoURL,
+		},
+		MenuData: MenuData{
+			Links: cfg.MenuLinks,
+		},
+		Content: template.HTML(md.RenderToString(pageMD)),
 	}
 	tmpl, err := template.ParseFiles(templatesFolder+"home.tpl", templatesFolder+"header.tpl", templatesFolder+"footer.tpl", templatesFolder+"menu.tpl")
 	check(err)
@@ -92,12 +104,18 @@ func servePage(w http.ResponseWriter, r *http.Request) {
 
 	data := PageContent{
 		HeaderData: HeaderData{
-			BlogTitle: cfg.BlogName,
-			PageTitle: FormatFileNameToTitle(fileName) + cfg.PageTitleSuffix, // TODO
+			BlogName:    cfg.BlogName,
+			PageTitle:   FormatFileNameToTitle(fileName) + cfg.PageTitleSuffix, // TODO
+			BlogLogoURL: cfg.BlogLogoURL,
 		},
-		FooterData: FooterData{},
-		MenuData:   MenuData{},
-		Content:    template.HTML(md.RenderToString(pageMD)),
+		FooterData: FooterData{
+			BlogName:    cfg.BlogName,
+			BlogLogoURL: cfg.BlogLogoURL,
+		},
+		MenuData: MenuData{
+			Links: cfg.MenuLinks,
+		},
+		Content: template.HTML(md.RenderToString(pageMD)),
 	}
 	tmpl, err := template.ParseFiles(templatesFolder+"view_page.tpl", templatesFolder+"header.tpl", templatesFolder+"footer.tpl", templatesFolder+"menu.tpl")
 	check(err)
@@ -115,11 +133,18 @@ func serveListPosts(w http.ResponseWriter, r *http.Request) {
 
 	data := PageListPosts{}
 	data.HeaderData = HeaderData{
-		BlogTitle: cfg.BlogName,
-		PageTitle: cfg.ListPostsPageTitle + cfg.PageTitleSuffix, // TODO
+		BlogName:    cfg.BlogName,
+		PageTitle:   cfg.ListPostsPageTitle + cfg.PageTitleSuffix, // TODO
+		BlogLogoURL: cfg.BlogLogoURL,
 	}
-	data.FooterData = FooterData{}
-	data.MenuData = MenuData{}
+	data.FooterData = FooterData{
+		BlogName:    cfg.BlogName,
+		BlogLogoURL: cfg.BlogLogoURL,
+	}
+	data.MenuData = MenuData{
+		Links: cfg.MenuLinks,
+	}
+	data.NoPostMessage = cfg.NoPostMessage
 	data.NumPosts = len(files)
 	data.MaxPage = data.NumPosts/cfg.MaxPostsOnListPage + 1
 
@@ -179,12 +204,18 @@ func servePost(w http.ResponseWriter, r *http.Request) {
 
 	data := PageContent{
 		HeaderData: HeaderData{
-			BlogTitle: cfg.BlogName,
-			PageTitle: FormatFileNameToTitle(fileName) + cfg.PageTitleSuffix, //TODO
+			BlogName:    cfg.BlogName,
+			PageTitle:   FormatFileNameToTitle(fileName) + cfg.PageTitleSuffix, //TODO
+			BlogLogoURL: cfg.BlogLogoURL,
 		},
-		FooterData: FooterData{},
-		MenuData:   MenuData{},
-		Content:    template.HTML(md.RenderToString(pageMD)),
+		FooterData: FooterData{
+			BlogName:    cfg.BlogName,
+			BlogLogoURL: cfg.BlogLogoURL,
+		},
+		MenuData: MenuData{
+			Links: cfg.MenuLinks,
+		},
+		Content: template.HTML(md.RenderToString(pageMD)),
 	}
 
 	tmpl, err := template.ParseFiles(templatesFolder+"view_post.tpl", templatesFolder+"header.tpl", templatesFolder+"footer.tpl", templatesFolder+"menu.tpl")
