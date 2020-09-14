@@ -15,10 +15,10 @@
         {{ end }}
         <div class="page-number-component">
             {{ if gt .NumPosts 0 }} {{ if gt .PageNumber 1 }}
-            <a href="?p={{ sub .PageNumber 1 }}"><button class="pagination-button">&lt;</button></a> {{ end }}
+            <a href="?p={{ sub .PageNumber 1 }}" class="pagination-button-link"><button class="pagination-button">&lt;</button></a> {{ end }}
             <div class="page-number">{{ .PageNumber }} / {{ .MaxPage }}</div>
             {{ if gt .MaxPage .PageNumber }}
-            <a href="?p={{ add .PageNumber 1 }}"><button class="pagination-button">&gt;</button>
+            <a href="?p={{ add .PageNumber 1 }}" class="pagination-button-link"><button class="pagination-button">&gt;</button>
             </a>{{ end }} {{ end }}
         </div>
         {{ end }}

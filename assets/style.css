@@ -182,3 +182,7 @@ pre code {
     font-family: monospace;
     cursor: pointer;
 }
+
+.pagination-button-link {
+    text-decoration: none;
+}
