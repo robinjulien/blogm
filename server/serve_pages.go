@@ -107,7 +107,7 @@ func servePage(w http.ResponseWriter, r *http.Request) {
 	data := PageContent{
 		HeaderData: HeaderData{
 			BlogName:    cfg.BlogName,
-			PageTitle:   FormatFileNameToTitle(fileName) + cfg.PageTitleSuffix, // TODO
+			PageTitle:   FormatFileNameToTitle(fileName) + cfg.PageTitleSuffix,
 			BlogLogoURL: cfg.BlogLogoURL,
 		},
 		FooterData: FooterData{
@@ -136,7 +136,7 @@ func serveListPosts(w http.ResponseWriter, r *http.Request) {
 	data := PageListPosts{}
 	data.HeaderData = HeaderData{
 		BlogName:    cfg.BlogName,
-		PageTitle:   cfg.ListPostsPageTitle + cfg.PageTitleSuffix, // TODO
+		PageTitle:   cfg.ListPostsPageTitle + cfg.PageTitleSuffix,
 		BlogLogoURL: cfg.BlogLogoURL,
 	}
 	data.FooterData = FooterData{
@@ -173,7 +173,7 @@ func serveListPosts(w http.ResponseWriter, r *http.Request) {
 		for i := (queryPageNumber - 1) * 10; (i < queryPageNumber*10) && i < len(files); i++ {
 			data.Posts = append(data.Posts, PostView{
 				Title: FormatFileNameToTitle(files[i].Name()),
-				Desc:  "", // TODO
+				Desc:  "", // TODO or not, performance may be impacted
 				Date:  files[i].ModTime(),
 				Link:  "/posts/" + strings.TrimSuffix(files[i].Name(), ".md"),
 			})
