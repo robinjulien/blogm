@@ -8,8 +8,6 @@ func Execute(args *[]string) int {
 			help()
 		case "init":
 			initInstance()
-		case "config":
-			config(args)
 		case "server":
 			server(args)
 		default:

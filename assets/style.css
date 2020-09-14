@@ -108,6 +108,11 @@ footer {
     height: 40px;
 }
 
+footer a {
+    text-decoration: underline;
+    color: white;
+}
+
 pre code {
     border-radius: 4px;
     padding: 8px!important;

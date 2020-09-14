@@ -82,6 +82,7 @@ func initInstance() {
 		writeFile("./assets/posts.tpl", POSTS_TPL)
 		writeFile("./assets/view_post.tpl", VIEW_POST_TPL)
 		writeFile("./assets/view_page.tpl", VIEW_PAGE_TPL)
+		writeFile("./assets/error_404.tpl", ERROR_404_TPL)
 
 		writeFile("./assets/public/style.css", STYLE_CSS)
 		writeFile("./assets/public/markdown.css", MARKDOWN_CSS)
