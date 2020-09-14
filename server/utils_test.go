@@ -23,3 +23,18 @@ func TestFormatFileNameToTitle(t *testing.T) {
 		t.Errorf("FormatFileNameToTitle(\"my_page._here_is_it\") = %s, want My Page. Here Is It", got)
 	}
 }
+
+func TestCalculateMaxPage(t *testing.T) {
+	got := CalculateMaxPage(50, 10)
+	if got != 5 {
+		t.Errorf("CalculateMaxPage(50, 10) = %d, want 5", got)
+	}
+	got = CalculateMaxPage(51, 10)
+	if got != 6 {
+		t.Errorf("CalculateMaxPage(51, 10) = %d, want 6", got)
+	}
+	got = CalculateMaxPage(0, 10)
+	if got != 6 {
+		t.Errorf("CalculateMaxPage(0, 10) = %d, want 0", got)
+	}
+}

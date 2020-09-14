@@ -26,15 +26,16 @@ func initInstance() {
 
 		// Default config
 		cfg := entities.Config{
-			Host:               "localhost",
-			Port:               "8080",
-			BlogName:           "Blog Name",
-			BlogLogoURL:        "//via.placeholder.com/60",
-			HomePageTitle:      "Default Homepage Title",
-			MaxPostsOnListPage: 10,
-			PageTitleSuffix:    " - BLOGM",
-			ListPostsPageTitle: "Posts List",
-			NoPostMessage:      "No post here...",
+			Host:                        "localhost",
+			Port:                        "8080",
+			BlogName:                    "Blog Name",
+			BlogLogoURL:                 "//via.placeholder.com/60",
+			HomePageTitle:               "Default Homepage Title",
+			MaxPostsOnListPage:          10,
+			PageTitleSuffix:             " - BLOGM",
+			ListPostsPageTitle:          "Posts List",
+			NoPostMessage:               "No post here...",
+			InvalidListPostsPageMessage: "Invalid page",
 			MenuLinks: []entities.Link{
 				{
 					Text:  "Home",

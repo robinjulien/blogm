@@ -7,6 +7,27 @@ All CSS properties can be custom by changing values of vars
     --general-page-side-padding: 20%;
 }
 
+@media screen and (min-width: 640px) and (max-width: 1000px) {
+     :root {
+        --general-page-side-padding: 10%;
+    }
+}
+
+@media screen and (max-width: 640px) {
+     :root {
+        --general-page-side-padding: 5%;
+    }
+}
+
+.disable-default-link a,
+.disable-default-link a:hover,
+.disable-default-link a:visited,
+.disable-default-link a:focus,
+.disable-default-link a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -92,10 +113,67 @@ pre code {
     padding: 8px!important;
 }
 
-.disable-default-link a,
-.disable-default-link a:hover,
-.disable-default-link a:visited,
-.disable-default-link a:focus,
-.disable-default-link a:active {
-    color: inherit;
+.error-block {
+    padding: 20px;
+    background-color: #cf2626;
+    border-radius: 20px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.postview {
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid grey;
+    margin-bottom: 20px;
+    background: white;
+}
+
+.postview a {
+    color: black;
+    text-decoration: underline;
+}
+
+#nopost {
+    padding: 20px;
+    border-radius: 20px;
+    background: white;
+    border: 2px solid grey;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.page-number-component {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.page-number {
+    border: 2px solid grey;
+    background: white;
+    height: 40px;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 40px;
+    /* to center vertically */
+    padding: 0 20px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 20px;
+}
+
+.pagination-button-container {
+    cursor: pointer;
+}
+
+.pagination-button {
+    background: white;
+    border: 2px solid grey;
+    display: block;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    font-family: monospace;
+    cursor: pointer;
 }

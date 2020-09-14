@@ -31,3 +31,12 @@ func FormatFileNameToTitle(name string) string {
 func RewritePath(path, oldprefix, newprefix string) string {
 	return strings.Replace(path, oldprefix, newprefix, 1)
 }
+
+// CalculateMaxPage calculate and return the max number of pages needed to displays all posts
+func CalculateMaxPage(n, maxPerPage int) int {
+	if n%maxPerPage == 0 {
+		return n / maxPerPage
+	} else {
+		return n/maxPerPage + 1
+	}
+}

@@ -48,16 +48,18 @@ type PostView struct {
 	Title string
 	Desc  string
 	Date  time.Time
+	Link  string
 }
 
 // PageListPosts is the content of the list posts page
 type PageListPosts struct {
 	PageContent
-	PageNumber    int
-	MaxPage       int
-	NumPosts      int
-	Posts         []PostView
-	NoPostMessage string
+	PageNumber                int
+	MaxPage                   int
+	NumPosts                  int
+	Posts                     []PostView
+	NoPostMessage             string
+	InvalidPageRequestMessage string
 }
 
 // function that respond when the home page is requested
@@ -146,7 +148,7 @@ func serveListPosts(w http.ResponseWriter, r *http.Request) {
 	}
 	data.NoPostMessage = cfg.NoPostMessage
 	data.NumPosts = len(files)
-	data.MaxPage = data.NumPosts/cfg.MaxPostsOnListPage + 1
+	data.MaxPage = CalculateMaxPage(data.NumPosts, cfg.MaxPostsOnListPage)
 
 	queryPage := r.URL.Query().Get("p")
 	var queryPageNumber int
@@ -160,7 +162,9 @@ func serveListPosts(w http.ResponseWriter, r *http.Request) {
 	data.PageNumber = queryPageNumber
 
 	if queryPageNumber <= 0 || queryPageNumber > data.MaxPage {
-		data.Content = template.HTML("erreur, page non valide") // TODO
+		if data.NumPosts != 0 || queryPageNumber != 1 { // If the querypage is invalid but there is no post && the query page is 1, then no invalid page message
+			data.InvalidPageRequestMessage = cfg.InvalidListPostsPageMessage
+		}
 	} else {
 		data.Posts = make([]PostView, 0)
 		// No check for md file, we consider here that only md files are located into the posts folder
@@ -171,6 +175,7 @@ func serveListPosts(w http.ResponseWriter, r *http.Request) {
 				Title: FormatFileNameToTitle(files[i].Name()),
 				Desc:  "", // TODO
 				Date:  files[i].ModTime(),
+				Link:  "/posts/" + strings.TrimSuffix(files[i].Name(), ".md"),
 			})
 		}
 	}
@@ -179,6 +184,12 @@ func serveListPosts(w http.ResponseWriter, r *http.Request) {
 	_tmpl.Funcs(template.FuncMap{  // Callable functions from template to format the date the way you want
 		"formatDate": func(date time.Time) string {
 			return date.Format("02/01/2006 - 15:04")
+		},
+		"add": func(a, b int) int {
+			return a + b
+		},
+		"sub": func(a, b int) int {
+			return a - b
 		},
 	})
 
