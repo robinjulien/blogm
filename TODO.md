@@ -1,2 +1,4 @@
 - Add CDN
 - Serve over HTTPS to remove proxy dependency
+- improve tests
+- improve errors check
