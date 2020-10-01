@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/robinjulien/blogm/entities"
+	"github.com/robinjulien/rblog/entities"
 )
 
 var cfg entities.Config
@@ -20,7 +20,7 @@ func Start() {
 	err = json.Unmarshal(bytescfg, &cfg)
 	check(err)
 
-	mux := new(BlogmHandler) // create new instance of BlogmHandler, that serve HTTP Request as a multiplexer
+	mux := new(RblogHandler) // create new instance of RblogHandler, that serve HTTP Request as a multiplexer
 
 	srv := &http.Server{
 		Addr:    cfg.Host + ":" + cfg.Port,

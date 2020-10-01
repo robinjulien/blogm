@@ -1,4 +1,4 @@
-module github.com/robinjulien/blogm
+module github.com/robinjulien/rblog
 
 go 1.15
 

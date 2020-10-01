@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/robinjulien/blogm/cli"
+	"github.com/robinjulien/rblog/cli"
 )
 
 //go:generate go run scripts/includeAssets.go

@@ -1,15 +1,15 @@
 @ECHO OFF
 CALL build.bat
 cd ..
-RMDIR /S /Q testblogm
-MKDIR testblogm
-MOVE blogm\blogm.exe testblogm\blogm.exe
-cd testblogm
-blogm init
+RMDIR /S /Q testrblog
+MKDIR testrblog
+MOVE rblog\rblog.exe testrblog\rblog.exe
+cd testrblog
+rblog init
 ECHO.
 for /l %%x in (1, 1, 50) do (
    echo TEST > posts\test%%x.md
 )
-blogm server start
+rblog server start
 cd ..
-cd blogm
+cd rblog

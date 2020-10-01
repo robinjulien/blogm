@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/robinjulien/blogm/entities"
+	"github.com/robinjulien/rblog/entities"
 	"gitlab.com/golang-commonmark/markdown"
 )
 

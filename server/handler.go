@@ -5,10 +5,10 @@ import (
 	"regexp"
 )
 
-// BlogmHandler used to serve http
-type BlogmHandler struct{}
+// RblogHandler used to serve http
+type RblogHandler struct{}
 
-func (h BlogmHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) { // multiplexer
+func (h RblogHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) { // multiplexer
 	switch r.Method {
 	case "GET":
 		// Static routes only, dynamic ones in default

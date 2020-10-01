@@ -1,0 +1,2 @@
+- Add CDN
+- Serve over HTTPS to remove proxy dependency

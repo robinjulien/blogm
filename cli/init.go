@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/robinjulien/blogm/entities"
+	"github.com/robinjulien/rblog/entities"
 )
 
 // write string into filename, creating the file
@@ -18,7 +18,7 @@ func writeFile(fileName string, content []byte) {
 	check(err)
 }
 
-// initInstance creates all the directories and file that a blogm instance need
+// initInstance creates all the directories and file that a rblog instance need
 func initInstance() {
 	if _, err := os.Stat("config.json"); os.IsNotExist(err) {
 		file, err := os.Create("config.json")
@@ -32,7 +32,7 @@ func initInstance() {
 			BlogLogoURL:                 "//via.placeholder.com/60",
 			HomePageTitle:               "Default Homepage Title",
 			MaxPostsOnListPage:          10,
-			PageTitleSuffix:             " - BLOGM",
+			PageTitleSuffix:             " - rblog",
 			ListPostsPageTitle:          "Posts List",
 			NoPostMessage:               "No post here...",
 			InvalidListPostsPageMessage: "Invalid page",
@@ -93,6 +93,6 @@ func initInstance() {
 
 	} else {
 		// config file already exists, there is a chance that a website is already init here
-		fmt.Println("A blogm instance is already init here.")
+		fmt.Println("A rblog instance is already init here.")
 	}
 }

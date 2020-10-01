@@ -1,6 +1,6 @@
-# BLOGM
+# RBLOG
 
-Blogm is a tiny microblog engine.
+rblog is a tiny microblog engine.
 
 
 
@@ -16,7 +16,7 @@ Download the default binary, or build one from source. Building from source let 
 
 To build from source, you just have to run the `build.bat` or `build.sh` script located inside the project.
 
-This result in a binary. I advise you to put that binary in a folder where the `PATH` environment variable points to, to just have to run `blogm` command to use it.
+This result in a binary. I advise you to put that binary in a folder where the `PATH` environment variable points to, to just have to run `rblog` command to use it.
 
 
 
@@ -27,7 +27,7 @@ You know have to go to an empty directory. This is where your blog is going to b
 Use :
 
 ```shell
-blogm init
+rblog init
 ```
 
 to create all the files and folder needed.
@@ -37,7 +37,7 @@ to create all the files and folder needed.
 Now run :
 
 ```shell
-blogm server start
+rblog server start
 ```
 
 To start the http server.
@@ -80,5 +80,5 @@ Posts title (displayed on the list posts page, for instance), is simply the file
 
 - I know the README isn't that good. I'm working on improving it.
 
-- At the moment, BLOGM is meant to run behind a reverse proxy such as `nginx`, as it doesn't support SSL/TLS (yet).
-- You can use `BLOGM` alongside `fs-server`  which can enable you to login, upload, edit or remove posts and pages online.
+- At the moment, rblog is meant to run behind a reverse proxy such as `nginx`, as it doesn't support SSL/TLS (yet).
+- You can use `rblog` alongside `fs-server`  which can enable you to login, upload, edit or remove posts and pages online.
