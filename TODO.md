@@ -1,4 +1,5 @@
 - ~~Add resource folder~~ Test it ! Is it safe and efficient ?
+- Remove directory listing in resources directory (Make it as an option)
 - Serve over HTTPS to remove proxy dependency
 - improve tests
 - improve errors check
