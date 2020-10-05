@@ -44,17 +44,24 @@ func dynamicRoutingGET(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	match, err = regexp.MatchString("^/posts/*$", path) // match for /posts/* URLs, that serve the /assets/public/ folder
+	match, err = regexp.MatchString("^/posts/*$", path) // match for /posts, /posts/, /posts// to serve the lists of posts
 	check(err)
 	if match {
 		serveListPosts(w, r)
 		return
 	}
 
-	match, err = regexp.MatchString("^/posts/", path) // match for /assets/* URLs, that serve the /assets/public/ folder
+	match, err = regexp.MatchString("^/posts/", path) // match for /posts/post-name to serve a specific post
 	check(err)
 	if match {
 		servePost(w, r)
+		return
+	}
+
+	match, err = regexp.MatchString("^/resources/", path) // match for /resources/ to serve public resources
+	check(err)
+	if match {
+		serveResource(w, r)
 		return
 	}
 

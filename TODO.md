@@ -1,4 +1,4 @@
-- Add CDN
+- ~~Add resource folder~~ Test it ! Is it safe and efficient ?
 - Serve over HTTPS to remove proxy dependency
 - improve tests
 - improve errors check

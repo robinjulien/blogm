@@ -61,7 +61,7 @@ func initInstance() {
 		// create all directories
 		err = os.Mkdir("posts", os.ModePerm)
 		check(err)
-		err = os.Mkdir("cdn", os.ModePerm)
+		err = os.Mkdir("resources", os.ModePerm)
 		check(err)
 		err = os.Mkdir("pages", os.ModePerm)
 		check(err)

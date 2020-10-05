@@ -234,3 +234,9 @@ func servePost(w http.ResponseWriter, r *http.Request) {
 	err = tmpl.ExecuteTemplate(w, "view_post.tpl", data)
 	check(err)
 }
+
+func serveResource(w http.ResponseWriter, r *http.Request) {
+	handler := http.FileServer(http.Dir("./resources/"))
+	r.URL.Path = RewritePath(r.URL.Path, "/resources/", "/")
+	handler.ServeHTTP(w, r)
+}
