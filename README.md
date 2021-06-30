@@ -16,7 +16,7 @@ Download the default binary, or build one from source. Building from source let 
 
 To build from source, you just have to run the `build.bat` or `build.sh` script located inside the project.
 
-This result in a binary. I advise you to put that binary in a folder where the `PATH` environment variable points to, to just have to run `rblog` command to use it.
+This results in a binary. I advise you to put that binary in a folder where the `PATH` environment variable points to, to just have to run `rblog` command to use it.
 
 
 
@@ -81,4 +81,4 @@ Posts title (displayed on the list posts page, for instance), is simply the file
 - I know the README isn't that good. I'm working on improving it.
 
 - At the moment, rblog is meant to run behind a reverse proxy such as `nginx`, as it doesn't support SSL/TLS (yet).
-- You can use `rblog` alongside `fs-server`  which can enable you to login, upload, edit or remove posts and pages online.
+- You can use `rblog` alongside `rcloud`  which can enable you to login, upload, edit or remove posts and pages online.
